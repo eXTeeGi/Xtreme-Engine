@@ -1,0 +1,100 @@
+#ifndef _SpriteString
+#define _SpriteString
+
+#include <vector>
+#include <string>
+#include "SpriteFont.h"
+
+class Glyph;
+
+class SpriteString
+{
+private:
+	std::vector<SpriteFont::Glyph*> glyphs;
+	int height;
+	int posx;
+	int posy;
+	int width;
+	SpriteFont* sfont;
+public:
+
+	~SpriteString() {};
+	SpriteString(const SpriteString&) = default;
+	SpriteString& operator=(const SpriteString&) = default;
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets the height of the characters in the Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	///
+	/// <returns>	The height. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	int GetHeight();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets the width of the characters in the Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	///
+	/// <returns>	The width. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	int GetWidth();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Renders the Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	void Render();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Sets the x and y position of the Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	///
+	/// <param name="x">	The x coordinate. </param>
+	/// <param name="y">	The y coordinate. </param>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	void Set(int x, int y);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Sets the font, string, and x and y position of the Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	///
+	/// <param name="sf">	The font. </param>
+	/// <param name="s"> 	An std::string to process. </param>
+	/// <param name="x"> 	The x coordinate. </param>
+	/// <param name="y"> 	The y coordinate. </param>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	void Set(SpriteFont* sf, std::string s, int x, int y);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Default constructor for Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	SpriteString();
+	//SpriteString(const SpriteFont&);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Constructor that sets the font, string, and position of the Sprite String. </summary>
+	///
+	/// <remarks>	Jakei, 3/12/2020. </remarks>
+	///
+	/// <param name="sf">	Font. </param>
+	/// <param name="s"> 	A std::string to process. </param>
+	/// <param name="x"> 	The x coordinate. </param>
+	/// <param name="y"> 	The y coordinate. </param>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	SpriteString(SpriteFont* sf, std::string s, int x, int y);
+};
+
+#endif _SpriteString

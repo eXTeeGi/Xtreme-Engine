@@ -1,0 +1,76 @@
+#ifndef _TimeManager
+#define _TimeManager
+
+#include "AzulCore.h"
+
+class FreezeTime;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// <summary>	Manager for times. </summary>
+///
+/// <remarks>	Jakei, 3/4/2020. </remarks>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class TimeManager
+{
+public:
+	static TimeManager* ptrinstance;
+
+	TimeManager();
+
+	static void Delete();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets frame time. </summary>
+	///
+	/// <remarks>	Jakei, 3/2/2020. </remarks>
+	///
+	/// <returns>	The frame time. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static float GetFrameTime();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets the current time in seconds. </summary>
+	///
+	/// <remarks>	Jakei, 3/2/2020. </remarks>
+	///
+	/// <returns>	The time. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static float GetTime();
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Calculates frame time. </summary>
+	///
+	/// <remarks>	Jakei, 3/2/2020. </remarks>
+	///
+	/// <param name="parameter1">	System time. </param>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static void ProcessTime(float);
+
+private:
+	static TimeManager& Instance() {
+		if (!ptrinstance)
+			ptrinstance = new TimeManager;
+		return *ptrinstance;
+	}
+
+	~TimeManager() {};
+	TimeManager(const TimeManager&) = delete;
+	TimeManager& operator=(const TimeManager&) = delete;
+
+	FreezeTime* FrzTime;
+
+	void privDelete();
+	float privGetFrameTime();
+	float privGetTime();
+	void privProcessTime(float);
+
+	float currentTime;
+	float frameTime;
+	float previousTime;
+};
+
+#endif _TimeManager

@@ -1,0 +1,232 @@
+#ifndef _XtremeMath
+#define _XtremeMath
+
+#include "AzulCore.h"
+
+class CollisionVolumeBSphere;
+class CollisionVolumeAABB;
+class CollisionVolumeOBB;
+class CollisionVolume;
+
+class XtremeMath
+{
+public:
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets the Manhattan Norm of a given vector. </summary>
+	///
+	/// <remarks>	Jakei, 3/2/2020. </remarks>
+	///
+	/// <param name="parameter1">	The vector. </param>
+	///
+	/// <returns>	A float. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static float ManhattanNorm(Vect);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets the Euclidean Norm of a given vector. </summary>
+	///
+	/// <remarks>	Jakei, 3/2/2020. </remarks>
+	///
+	/// <param name="parameter1">	The vector. </param>
+	///
+	/// <returns>	A float. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static float EuclideanNorm(Vect);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Gets the absolute value of a float. </summary>
+	///
+	/// <remarks>	Jakei, 3/2/2020. </remarks>
+	///
+	/// <param name="parameter1">	The float. </param>
+	///
+	/// <returns>	A float. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static float abs(float);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Given a model and matrix, calculate the appropriate BSphere using Ritters. </summary>
+	///
+	/// <remarks>	Jakei, 4/8/2020. </remarks>
+	///
+	/// <param name="Model">	The model. </param>
+	/// <param name="Matrix">	The matrix. </param>
+	/// <param name="centerOut">	The output for the center of the BSphere. </param>
+	/// <param name="radiusOut">	The output for the radius of the BSphere. </param>
+	///
+	/// <returns>	nothing </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static void Ritters(Model* mod, const Matrix& mat, Vect& centerOut, float& radiusOut);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Clamps a float between two floats. </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <param name="value">	A reference to the value to be clamped. </param>
+	/// <param name="lower">	The lower bound of the clamp. </param>
+	/// <param name="upper">	The upper bound of the clamp. </param>
+	///
+	/// <returns>	nothing </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static void Clamp(float& value, float lower, float upper);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Clamps an int between two floats. </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <param name="value">	A reference to the value to be clamped. </param>
+	/// <param name="lower">	The lower bound of the clamp. </param>
+	/// <param name="upper">	The upper bound of the clamp. </param>
+	///
+	/// <returns>	nothing </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static void Clamp(int& value, int lower, int upper);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Calculates the projection of v onto w. </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <param name="v">	Vector v. </param>
+	/// <param name="w">	Vector w. </param>
+	///
+	/// <returns>	the resulting projection. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static Vect Projection(Vect& v, Vect& w);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an interval test on two intervals </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <param name="lower1">	the lower bound of the first interval </param>
+	/// <param name="upper1">	the upper bound of the first interval </param>
+	/// <param name="lower2">	the lower bound of the second interval </param>
+	/// <param name="upper2">	the upper bound of the second interval </param>
+	///
+	/// <returns>	true or false </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	static bool IntervalTest(float lower1, float upper1, float lower2, float upper2);
+
+	// Intersections
+
+	//BSphere
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on a bsphere and a bsphere </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeBSphere& A, const CollisionVolumeBSphere& B);
+
+	//AABB
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on a bsphere and an AABB </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeBSphere& A, const CollisionVolumeAABB& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on an AABB and a bsphere </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeAABB& A, const CollisionVolumeBSphere& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on an AABB and an AABB </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeAABB& A, const CollisionVolumeAABB& B);
+	
+	//OBB
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on an OBB and an OBB </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeOBB& A, const CollisionVolumeOBB& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on an OBB and an AABB </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeOBB& A, const CollisionVolumeAABB& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on an AABB and an OBB </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeAABB& A, const CollisionVolumeOBB& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on an OBB and a bsphere </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeOBB& A, const CollisionVolumeBSphere& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on a bsphere and an OBB </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolumeBSphere& A, const CollisionVolumeOBB& B);
+	
+	//Line
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on a line and a bsphere </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(Vect& listener, Vect& source, const CollisionVolumeBSphere& B);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	/// <summary>	Performs an intersect test on two collision volumes </summary>
+	///
+	/// <remarks>	Jakei, 6/7/2020. </remarks>
+	///
+	/// <returns>	Whether they collide. </returns>
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	static bool Intersect(const CollisionVolume& A, const CollisionVolume& B);
+};
+
+#endif _XtremeMath
